@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql_expr_list>
+    <!--<expression name="SetImpDocDbf" lang="PL/SQL">-->
+        <!--<script><![CDATA[-->
+        <!--DECLARE-->
+            <!--L_itrnSop number := :itrnsop;-->
+        <!--BEGIN-->
+            <!--insert into ik_imp_doc_dbf (regid, idocid, iregway, ibatnum, idocstatus, dprocessdate,-->
+               <!--code, orgdate, daydate, sourcecode, targetcode,-->
+               <!--debitcode, creditcode, debitname, creditname, actionid,-->
+               <!--crtag, cramount, kind, purpose, ctrls, ctrls_2, dbstate,-->
+               <!--crstate, docinfo, nbu_s_nr, cashinfo, itrnsop,-->
+               <!--cerrormessage)-->
+               <!--values (:regid, ik_imp_doc_id_gen.NEXTVAL, :iregway,-->
+               <!--:ibatnum, :idocstatus, :dprocessdate,-->
+               <!--:code, to_date(:orgdate,'DD.MM.RRRR'), to_date(:daydate,'DD.MM.RRRR'), :sourcecode, :targetcode,-->
+               <!--:debitcode, :creditcode, :debitname, :creditname, :actionid,-->
+               <!--:crtag, :cramount, :kind, :purpose, :ctrls, :ctrls_2, :dbstate,-->
+               <!--:crstate, :docinfo, :nbu_s_nr, :cashinfo, :itrnsop,-->
+               <!--:errormessage);-->
+        <!--END;]]></script>-->
+    <!--</expression>-->
+
+    <expression name="IK_IMP.reg_by_mrkID" lang = "PL/SQL">
+        <script><![CDATA[CALL ik_imp.reg_by_mrkID( :idmarker, :cnt_all, :cnt_err) into :res]]></script>
+        <parameters>
+            <parameter name="idmarker" mode="IN" sqlType="BIGINT" javaType="Long" />
+            <parameter name="res" mode="OUT" sqlType="BIGINT" javaType="Long" />
+            <parameter name="cnt_all" mode="OUT" sqlType="BIGINT" javaType="Long" />
+            <parameter name="cnt_err" mode="OUT" sqlType="BIGINT" javaType="Long" />
+        </parameters>
+    </expression>
+
+    <expression name="DeleteMarkedImpDocDbf" lang="PL/SQL">
+        <script><![CDATA[
+        BEGIN
+            delete from xxi."ik_imp_doc_dbf" where
+            idocid in (select mrk_id.idrow from mrk_id where mrk_id.idmarker = :idmarker);
+        END;]]></script>
+    </expression>
+
+    <expression name="DeleteMarkedReg" lang="PL/SQL">
+        <script><![CDATA[
+        BEGIN
+            delete from ik_dbf_imp_reg where
+            ik_dbf_imp_reg.id in (select mrk_id.idrow from mrk_id where mrk_id.idmarker = :idmarker);
+        END;]]></script>
+    </expression>
+
+    <expression name="IK_IMP.saveMatchFields" lang="PL/SQL">
+        <script><![CDATA[CALL ik_imp.saveMatchFields( :p_formatID, :p_xxiField, :p_dbfField) into :res]]></script>
+        <parameters>
+            <parameter name="res" mode="OUT" sqlType="BIGINT" javaType="Long" />
+        </parameters>
+    </expression>
+
+    <expression name="TrnDpDocCounter" lang="PL/SQL">
+        <script><![CDATA[
+        BEGIN
+            select count(*) into :trnCount from trn where trn.itrnnum in (select itrnnum from ik_imp_doc_dbf,mrk_id where idocid=idrow and idmarker=:idmarker);
+            select count(*) into :dpDocCount from dp_doc where dp_doc.id in (select itrnnum from ik_imp_doc_dbf,mrk_id where idocid=idrow and idmarker=:idmarker);
+        END;]]>
+        </script>
+        <parameters>
+            <parameter name="trnCount" mode="OUT" sqlType="BIGINT" javaType="Long" />
+            <parameter name="dpDocCount" mode="OUT" sqlType="BIGINT" javaType="Long" />
+        </parameters>
+    </expression>
+
+    <expression name="SetBtlFog" lang="PL/SQL">
+    <script><![CDATA[
+        begin
+            IF :cmode='INS' THEN
+                insert into xxi."ik_btl_fog" values (:cfogbic, :enabled, :password);
+            ELSIF :cmode='UPD' THEN
+                update xxi."ik_btl_fog" set
+                       cfogbic = :cfogbic,
+                       enabled = :enabled,
+                       password = :password
+                       where cfogbic = :id;
+            ELSIF :cmode='DEL' THEN
+                delete from xxi."ik_btl_fog" where cfogbic = :id;
+            END IF;
+        exception
+            when others then
+            :verr := sqlcode||' '||sqlerrm;
+        end;]]></script>
+        <parameters>
+            <parameter name="verr" mode="OUT" sqlType="VARCHAR" javaType="String" />
+        </parameters>
+    </expression>
+
+
+</sql_expr_list>

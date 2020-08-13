@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import ru.inversion.fx.form.controls.*?>
+<?import ru.inversion.fx.form.controls.dsbar.DSInfoBar?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="400.0" prefWidth="800.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.inversionkavkaz.btladmin.cancelreason.controller.ViewIkBtlCancelReasonController">
+<children>
+<JInvToolBar fx:id="toolBar" />
+<JInvTable fx:id="IK_BTL_CANCEL_REASON" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
+<columns>
+<JInvTableColumnBigDecimal fx:id="ID" text="%ID" fieldName="ID"  />
+<JInvTableColumn fx:id="REASON_SHORT" text="%REASON_SHORT" fieldName="REASON_SHORT" prefWidth="300.0" />
+<JInvTableColumn fx:id="REASON_FULL" text="%REASON_FULL" fieldName="REASON_FULL" prefWidth="300.0" />
+<JInvTableColumn fx:id="SUBITEM_SHORT" text="%SUBITEM_SHORT" fieldName="SUBITEM_SHORT" prefWidth="300.0" />
+<JInvTableColumn fx:id="SUBITEM_FULL" text="%SUBITEM_FULL" fieldName="SUBITEM_FULL" prefWidth="300.0" />
+</columns>
+<VBox.margin>
+<Insets bottom="5.0" left="5.0" right="5.0" />
+</VBox.margin>
+</JInvTable>
+</children>
+</VBox>

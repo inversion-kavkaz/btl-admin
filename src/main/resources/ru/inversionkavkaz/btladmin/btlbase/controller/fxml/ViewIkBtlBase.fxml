@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import ru.inversion.bicomp.tablecolumn.JInvTableColumnBiComp?>
+<?import ru.inversion.fx.form.controls.JInvTable?>
+<?import ru.inversion.fx.form.controls.JInvTableColumn?>
+<?import ru.inversion.fx.form.controls.JInvTableColumnDate?>
+<?import ru.inversion.fx.form.controls.JInvTableColumnMoney?>
+<?import ru.inversion.fx.form.controls.JInvToolBar?>
+<?import ru.inversion.fx.form.controls.dsbar.DSInfoBar?>
+
+<VBox prefHeight="400.0" prefWidth="800.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.inversionkavkaz.btladmin.btlbase.controller.ViewIkBtlBaseController">
+<children>
+<JInvToolBar fx:id="toolBar" />
+<JInvTable fx:id="IK_BTL_BASE" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
+<columns>
+<JInvTableColumn fx:id="ID" fieldName="ID" text="%ID" />
+<JInvTableColumnDate fx:id="CREATED" dateFormat="DATE_TIME" fieldName="CREATED" text="%CREATED" />
+<JInvTableColumn prefWidth="250" text="%STATUS" idF7FilterGroup="F7STATUS_GROUP">
+    <columns>
+        <JInvTableColumn fx:id="STATUS_CODE" fieldName="STATUS_CODE" text="%STATUS_CODE" idF7FilterGroup="F7STATUS_GROUP"/>
+        <JInvTableColumn fx:id="STATUS_MESSAGE" fieldName="STATUS_MESSAGE" prefWidth="300.0" text="%STATUS_MESSAGE" idF7FilterGroup="F7STATUS_GROUP"/>
+        <JInvTableColumnDate fx:id="STATUS_DATE" dateFormat="DATE_TIME" fieldName="STATUS_DATE" text="%STATUS_DATE" idF7FilterGroup="F7STATUS_GROUP"/>
+    </columns>
+</JInvTableColumn>
+<JInvTableColumn fx:id="NUM" fieldName="NUM" text="%NUM" />
+<!--<JInvTableColumn fx:id="REQ_TYPE" fieldName="REQ_TYPE" text="%REQ_TYPE" />-->
+<JInvTableColumn fx:id="REQTYPENAME" fieldName="reqTypeName" text="Тип запроса имя" transientColumn="false"/>
+<JInvTableColumnDate fx:id="REQ_DATE" dateFormat="DATE_TIME" fieldName="REQ_DATE" text="%REQ_DATE" />
+<JInvTableColumnMoney fx:id="MSUMM" fieldName="MSUMM" text="%MSUMM" />
+<JInvTableColumnMoney fx:id="MSUMMR" fieldName="MSUMMR" text="%MSUMMR" />
+<JInvTableColumnBiComp fx:id="CCURCODE" fieldName="CCURCODE" text="%CCURCODE" typeColumn="CUR" />
+<JInvTableColumn fx:id="LIMIT_CODE" fieldName="LIMIT_CODE" text="%LIMIT_CODE" />
+<JInvTableColumn prefWidth="450.0" text="%PAYER" idF7FilterGroup="F7PAYER_GROUP">
+    <columns>
+        <JInvTableColumn fx:id="PAYER_NAME" fieldName="PAYER_NAME" prefWidth="200.0" text="%PAYER_NAME" idF7FilterGroup="F7PAYER_GROUP"/>
+        <JInvTableColumn fx:id="PAYER_INN" fieldName="PAYER_INN" text="%PAYER_INN" idF7FilterGroup="F7PAYER_GROUP"/>
+        <JInvTableColumn fx:id="PAYER_BANK_BIC" fieldName="PAYER_BANK_BIC" lovClassName="ru.inversionkavkaz.btladmin.entity.PIkBtlFog" text="%PAYER_BANK_BIC" idF7FilterGroup="F7PAYER_GROUP"/>
+   </columns>
+</JInvTableColumn>
+<JInvTableColumn prefWidth="350" text="%RECIP" idF7FilterGroup="F7RECIP_GROUP">
+    <columns>
+        <JInvTableColumn fx:id="RECIP_NAME" fieldName="RECIP_NAME" prefWidth="300.0" text="%RECIP_NAME" idF7FilterGroup="F7RECIP_GROUP"/>
+        <JInvTableColumn fx:id="RECIP_INN" fieldName="RECIP_INN" text="%RECIP_INN" idF7FilterGroup="F7RECIP_GROUP"/>
+    </columns>
+</JInvTableColumn>
+<JInvTableColumn fx:id="CPURPPLATVO" fieldName="CPURPPLATVO" prefWidth="300.0" text="%CPURPPLATVO" />
+<JInvTableColumn prefWidth="350" text="%CANCEL_AGREE" idF7FilterGroup="F7CANCEL_GROUP" >
+    <columns>
+        <JInvTableColumn fx:id="CANCEL_AGREE_NUM" fieldName="CANCEL_AGREE_NUM" text="%CANCEL_AGREE_NUM" idF7FilterGroup="F7CANCEL_GROUP"/>
+        <JInvTableColumn fx:id="CANCEL_TRANSACTION_ID" fieldName="CANCEL_TRANSACTION_ID" text="%CANCEL_TRANSACTION_ID" idF7FilterGroup="F7CANCEL_GROUP"/>
+        <JInvTableColumn fx:id="CANCEL_REASON_CODE" fieldName="CANCEL_REASON_CODE" text="%CANCEL_REASON_CODE" idF7FilterGroup="F7CANCEL_GROUP"/>
+        <JInvTableColumn fx:id="CANCEL_REASON_MESSAGE" fieldName="CANCEL_REASON_MESSAGE" prefWidth="300.0" text="%CANCEL_REASON_MESSAGE" idF7FilterGroup="F7CANCEL_GROUP"/>
+    </columns>
+</JInvTableColumn>
+
+<JInvTableColumn fx:id="DOCREF" fieldName="DOCREF" text="%DOCREF" />
+<JInvTableColumn prefWidth="250" text="%USER" idF7FilterGroup="F7USER_GROUP">
+     <columns>
+         <JInvTableColumn fx:id="CREATE_USR" fieldName="CREATE_USR" text="%CREATE_USR" idF7FilterGroup="F7USER_GROUP"/>
+         <JInvTableColumn fx:id="AGREE_USR" fieldName="AGREE_USR" text="%AGREE_USR" idF7FilterGroup="F7USER_GROUP"/>
+     </columns>
+ </JInvTableColumn>
+
+</columns>
+<VBox.margin>
+<Insets left="5.0" right="5.0" />
+</VBox.margin>
+</JInvTable>
+<DSInfoBar fx:id="IK_BTL_BASE$MARK">
+<VBox.margin>
+<Insets bottom="5.0" left="5.0" right="5.0" />
+</VBox.margin>
+</DSInfoBar>
+</children>
+</VBox>
