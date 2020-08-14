@@ -18,11 +18,9 @@ import ru.inversion.fx.form.*;
 import ru.inversion.fx.form.controls.*;
 import ru.inversion.icons.enums.FontAwesome;
 import ru.inversionkavkaz.btladmin.btlbase.entity.PIkBtlBase;
-import ru.inversionkavkaz.btladmin.status.controller.EditStatusController;
 import ru.inversionkavkaz.btladmin.statusau.controller.ViewIkBtlBaseStatsAuController;
 import ru.inversionkavkaz.btladmin.utils.AltPrintReportType;
-import ru.inversionkavkaz.taxex.entity.PIkNiFiles;
-import ru.inversionkavkaz.taxex.utils.ButtonUtils;
+import ru.inversionkavkaz.btladmin.utils.ButtonUtils;
 
 import java.util.function.BiConsumer;
 
@@ -217,7 +215,7 @@ public class ViewIkBtlBaseController extends JInvFXBrowserController
     }
 
     private void initCellRenderer() {
-        STATUS_CODE.setCellRenderer((BiConsumer<JInvTableCell<PIkNiFiles, Long>, Long>) (cell, aString) -> {
+        STATUS_CODE.setCellRenderer((BiConsumer<JInvTableCell<PIkBtlBase, Long>, Long>) (cell, aString) -> {
             PIkBtlBase ikBtlBase = (PIkBtlBase) cell.getTableRow().getItem();
             if (ikBtlBase != null) {
                 switch (ikBtlBase.getSTATUS_CODE().intValue()){

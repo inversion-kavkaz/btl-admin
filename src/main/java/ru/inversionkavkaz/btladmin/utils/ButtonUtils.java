@@ -33,4 +33,17 @@ public class ButtonUtils {
         return btn;
     }
 
+    public static JInvButton addBtn(JInvToolBar toolBar, String title, String tooltip, FontAwesome iconID, EventHandler event) {
+        JInvAction jInvPropAction = new JInvAction();
+        jInvPropAction.setToolTip(tooltip);
+        jInvPropAction.setHandler(event);
+        jInvPropAction.setIcon(new IconDescriptorBuilder(iconID, (String) null).build());
+        JInvButton btn = new JInvButton();
+        btn.setAction(jInvPropAction);
+        btn.setText(title);
+        toolBar.getItems().add(btn);
+
+        return btn;
+    }
+
 }
